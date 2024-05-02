@@ -1,30 +1,69 @@
-# React + TypeScript + Vite
+# slack-clone アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Slack の基本機能を模倣したチームコミュニケーションアプリ
 
-Currently, two official plugins are available:
+## 基本機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ユーザー登録と認証
+  - アプリを使用するために、ユーザーはアカウントを作成し、ログインする必要がある。Google 認証を利用してユーザー登録を行う必要がある。
+- メッセージの送受信
+  - ユーザーはリアルタイムでテキストメッセージを送受信できる。
+- チャンネルの作成と管理
+  - ユーザーはチャンネルを作成し、管理することができる。これにより、特定のトピックやグループに関連するディスカッションを異なるチャンネルで実施できる。
 
-## Expanding the ESLint configuration
+## 技術スタック
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+その他の使用技術やバージョン情報などは package.json を参照
 
-- Configure the top-level `parserOptions` property like this:
+| 技術         | 用途                           |
+| ------------ | ------------------------------ |
+| React        | フロントエンド UI ライブラリ   |
+| TypeScript   | 静的型付け言語                 |
+| Vite         | ビルドツールおよび開発サーバー |
+| Tailwind CSS | CSS フレームワーク             |
+| Biome        | リンター及びフォーマッター     |
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## フォルダ構成
+
+```text
+src/
+├─ app/                        # Redux設定
+│  ├─ hooks.ts                 # Reduxのカスタムフック
+│  └─ store.ts                 # Reduxストアの設定
+│
+├─ components/
+│  ├─ ChatContainer/
+│  │  ├─ ChannelAddModal.tsx   # チャンネルを追加するモーダル
+│  │  ├─ ChannelCell.tsx       # チャンネル名の表示
+│  │  ├─ ChannelList.tsx       # チャンネルリスト、チャンネルを追加ボタン
+│  │  ├─ MessageArea.tsx       # メッセージリスト、メッセージのフォーム
+│  │  └─ MessageTile.tsx       # メッセージ1つの表示
+│  ├─ ChatContainer.tsx        # 右側部分の表示
+│  ├─ Login.tsx                # Googleでログイン
+│  └─ Sidebar.tsx              # サイドバーの表示
+│
+├─ features/                   # 機能ごとのReduxロジックとコンポーネント
+│  ├─ auth/
+│  │  ├─ auth.ts               # Firebase認証関連の関数（Googleログイン等）
+│  │  └─ useAuthState.tsx      # 自動ログイン機能
+│  ├─ channel/
+│  │  ├─ channelAPI.ts         # チャンネルに関するAPI呼び出しの定義
+│  │  └─ channelSlice.ts       # state管理に関するRedux Sliceの定義
+│  ├─ message/
+│  │  └─ messageAPI.ts         # メッセージに関するAPI呼び出しの定義
+│  └─ user/
+│     ├─ userAPI.ts            # ユーザー情報に関するAPI呼び出しの定義
+│     └─ userSlice.ts          # state管理に関するRedux Sliceの定義
+│
+├─ firebase/                   # Firebase設定
+│  └─ firebaseconfig.ts
+│
+├─ types/                      # TypeScriptの型定義
+│  ├─ Channel.ts
+│  ├─ Message.ts
+│  └─ User.ts
+│
+├─ index.css                   # グローバルスタイルシート
+├─ index.tsx                   # アプリケーションのエントリポイント
+└─ App.tsx                     # アプリケーションのルートコンポーネント
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

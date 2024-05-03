@@ -1,7 +1,13 @@
-import "./App.css";
+import ChatContainer from "./components/ChatContainer";
+import SideBar from "./components/SideBar";
 
 function App() {
-	return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+	return (
+		<div className="flex">
+			<SideBar />
+			<ChatContainer />
+		</div>
+	);
 }
 
 export default App;

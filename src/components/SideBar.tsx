@@ -17,7 +17,7 @@ const SideBar = () => {
 			</div>
 			<div className="py-5 mt-auto mx-2 flex flex-col items-center">
 				<div className="bg-gray-700 p-2 rounded-lg">
-					<img src="/default-user-icon.webp" alt="" />
+					<img src="/default-user-icon.png" alt="" />
 				</div>
 				<span className="text-xs">DM</span>
 			</div>

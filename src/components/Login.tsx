@@ -1,13 +1,25 @@
-import { signInWithGoogle } from "../features/auth/Auth";
+// import { signInWithGoogle } from "../features/auth/Auth";
+import { getUser } from "../features/user/userAPI";
 
 const Login = () => {
-	const loginWithGoogle = async () => {
+	// const loginWithGoogle = async () => {
+	// 	try {
+	// 		const result = await signInWithGoogle();
+	// 		const loginUser = result.user;
+	// 		console.log(loginUser);
+	// 	} catch (error) {
+	// 		console.error("Login failed:", error);
+	// 	}
+	// };
+
+	const getUserInfo = async () => {
 		try {
-			const result = await signInWithGoogle();
-			const loginUser = result.user;
-			console.log(loginUser);
+			const user = await getUser("SWv3JOphZra1R6fMrayB");
+			if (user) {
+				console.log(user);
+			}
 		} catch (error) {
-			console.error("Login failed:", error);
+			console.log("Login failed: ", error);
 		}
 	};
 
@@ -24,7 +36,7 @@ const Login = () => {
 						<button
 							className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="button"
-							onClick={loginWithGoogle}
+							onClick={getUserInfo}
 						>
 							ログイン
 						</button>

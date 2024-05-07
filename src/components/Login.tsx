@@ -1,10 +1,14 @@
 import { useDispatch } from "react-redux";
-import { login } from "../features/user/userSlice";
+import { googleSignInAndUserSetup, login } from "../features/user/userSlice";
 
 const Login = () => {
 	const dispatch = useDispatch();
-	const setUserId = () => {
-		dispatch(login("SWv3JOphZra1R6fMrayB"));
+	const loginWithGoogle = () => {
+		googleSignInAndUserSetup().then((userId) => {
+			if (userId) {
+				dispatch(login(userId));
+			}
+		});
 	};
 
 	return (
@@ -20,7 +24,7 @@ const Login = () => {
 						<button
 							className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="button"
-							onClick={setUserId}
+							onClick={loginWithGoogle}
 						>
 							ログイン
 						</button>

@@ -1,13 +1,21 @@
-// import ChatContainer from "./components/ChatContainer";
-// import SideBar from "./components/SideBar";
+import { useAppSelector } from "./app/hooks";
+import ChatContainer from "./components/ChatContainer";
 import Login from "./components/Login";
+import SideBar from "./components/SideBar";
 
 function App() {
+	const userId = useAppSelector((state) => state.user.userId);
+
 	return (
 		<div className="flex">
-			<Login />
-			{/* <SideBar />
-			<ChatContainer /> */}
+			{userId.trim() === "" ? (
+				<Login />
+			) : (
+				<>
+					<SideBar />
+					<ChatContainer />
+				</>
+			)}
 		</div>
 	);
 }

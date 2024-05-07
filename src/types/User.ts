@@ -4,7 +4,7 @@ export interface User {
 	displayName: string;
 }
 
-export interface userRef {
+export interface UserRef {
 	uid: string;
 	user: User;
 }

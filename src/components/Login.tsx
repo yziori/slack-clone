@@ -1,26 +1,10 @@
-// import { signInWithGoogle } from "../features/auth/Auth";
-import { getUser } from "../features/user/userAPI";
+import { useDispatch } from "react-redux";
+import { login } from "../features/user/userSlice";
 
 const Login = () => {
-	// const loginWithGoogle = async () => {
-	// 	try {
-	// 		const result = await signInWithGoogle();
-	// 		const loginUser = result.user;
-	// 		console.log(loginUser);
-	// 	} catch (error) {
-	// 		console.error("Login failed:", error);
-	// 	}
-	// };
-
-	const getUserInfo = async () => {
-		try {
-			const user = await getUser("SWv3JOphZra1R6fMrayB");
-			if (user) {
-				console.log(user);
-			}
-		} catch (error) {
-			console.log("Login failed: ", error);
-		}
+	const dispatch = useDispatch();
+	const setUserId = () => {
+		dispatch(login("SWv3JOphZra1R6fMrayB"));
 	};
 
 	return (
@@ -36,7 +20,7 @@ const Login = () => {
 						<button
 							className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="button"
-							onClick={getUserInfo}
+							onClick={setUserId}
 						>
 							ログイン
 						</button>

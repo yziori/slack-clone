@@ -12,7 +12,9 @@ const SideBar = () => {
 		const fetchUser = async () => {
 			if (userId) {
 				const userRef = await getUser(userId);
-				setUser(userRef);
+				if (userRef) {
+					setUser(userRef);
+				}
 			}
 		};
 		fetchUser();

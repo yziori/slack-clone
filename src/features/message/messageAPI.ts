@@ -24,7 +24,7 @@ export const subscribeMessage = (
 	onMessageUpdated: (messages: MessageRef[]) => void,
 ) => {
 	const q = query(
-		collection(db, "message"),
+		collection(db, "messages"),
 		where("channelId", "==", channelId),
 	);
 
@@ -52,7 +52,7 @@ export const subscribeMessage = (
  * @param message - 追加するメッセージ
  */
 export const postMessage = async (message: Message) => {
-	await addDoc(collection(db, "message"), message);
+	await addDoc(collection(db, "messages"), message);
 };
 
 /**

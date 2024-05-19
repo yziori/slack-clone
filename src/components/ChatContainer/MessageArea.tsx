@@ -1,8 +1,17 @@
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import SendIcon from "@mui/icons-material/Send";
-import { type ChangeEvent, type KeyboardEvent, useState } from "react";
+import {
+	type ChangeEvent,
+	type KeyboardEvent,
+	useEffect,
+	useState,
+} from "react";
 import { useAppSelector } from "../../app/hooks";
-import { createMessage } from "../../features/message/messageAPI";
+import {
+	createMessage,
+	postMessage,
+	subscribeMessage,
+} from "../../features/message/messageAPI";
 import type { MessageRef } from "../../types/Message";
 import MessageTile from "./MessageTile";
 
@@ -32,6 +41,13 @@ const MessageArea = () => {
 			sendMessage();
 		}
 	};
+
+	useEffect(() => {
+		const unsubscribe = subscribeMessage(channelId, (messageRefs) => {
+			setMessageRefs(messageRefs);
+		});
+		return () => unsubscribe();
+	}, [channelId]);
 	return (
 		<div className="flex-1 flex-col flex bg-gray-500">
 			<div className="p-4 m-3">

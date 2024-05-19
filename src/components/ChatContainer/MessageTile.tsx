@@ -38,7 +38,7 @@ const MessageTile = (message: MessageTileProps) => {
 						{owner?.displayName || "unkown"}
 					</div>
 					<div className="text-sm text-gray-400">
-						{message.message.createAt.toDate.toLocaleString() || ""}
+						{message.message.createAt.toDate().toLocaleString() || ""}
 					</div>
 				</div>
 			</div>
